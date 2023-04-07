@@ -1,17 +1,24 @@
 package br.com.bytegames.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController   //quer dizer que é uma classe que vai receber requisições
-@RequestMapping("/clientes")   //mappeia os endpoints para receber as requisições em determinada rota
+import br.com.bytegames.model.Cliente;
+import br.com.bytegames.repository.ClienteRepository;
 
+@RestController
+@RequestMapping("/clientes")
 public class ClienteController {
+
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
 	@GetMapping
-	public String hello() {
-		return "Hello world!";
+	public List<Cliente> listar() {
+		return clienteRepository.findAll();
 	}
-	
 }
